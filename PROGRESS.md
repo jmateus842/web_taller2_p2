@@ -432,3 +432,160 @@
 *Next Session Planned: Data seeding and model associations*
 
 ---
+## 2025-07-16 00:28 (Session 7)
+
+### Accomplished
+- **Step 4: Data Seeding - COMPLETE:**
+  - **Etiquetas Seeder Created**: Generated `seeders/20250716002605-etiquetas.js` with 8 predefined tags
+  - **Fotoetiquetas Seeder Created**: Generated `seeders/20250716002619-fotoetiqueta.js` for junction table relationships
+  - **Database Populated**: Successfully ran seeders to insert 8 etiquetas and 3 fotoetiquetas relationships
+  - **Data Verification**: Confirmed all tags and relationships are properly stored in database
+- **Step 5: Model Associations - COMPLETE:**
+  - **Foto Model Updated**: Added belongsToMany association with etiqueta through fotoetiquetas
+  - **Etiqueta Model Updated**: Added belongsToMany association with foto through fotoetiquetas
+  - **Routes Enhanced**: Updated `/fotos/findAll/json` endpoint to include associated tags
+  - **API Testing**: Verified JSON endpoint returns photos with their associated tags correctly
+
+### Technical Implementation
+- **Seeder Development**: Used exact patterns from `guia_ppt_parte2.md` sections 6 and 7
+- **Association Configuration**: Implemented bidirectional belongsToMany relationships with proper foreign keys
+- **Query Optimization**: Used include with through attributes exclusion for clean JSON output
+- **Data Integrity**: Foreign key constraints ensure referential integrity between all tables
+
+### Testing & Validation Framework
+- **Seeder Testing**: Verified 8 etiquetas and 3 fotoetiquetas relationships created successfully
+- **Association Testing**: Confirmed photos return with their associated tags in JSON response
+- **API Testing**: Validated endpoint returns correct N:M relationship data
+- **Database Integrity**: All relationships maintain proper foreign key constraints
+
+### Observations / Issues
+- **No Errors**: All seeding and association steps completed successfully
+- **Learning Outcomes**: Gained experience with Sequelize N:M relationships and complex queries
+- **Quality Improvements**: Database now supports complex photo-tag relationships with full integrity
+- **API Enhancement**: JSON endpoint now provides rich data with associated tags
+
+### Next Steps
+1. **Step 6: View Enhancement:**
+   - Update HTML view to display tags alongside photos
+   - Add navigation between different views
+   - Improve user interface for tag display
+2. **Step 7: Application Polish:**
+   - Add error handling and validation
+   - Implement tag management functionality
+   - Create user-friendly tag filtering
+
+### Code Changes Summary
+- **New Files Created:**
+  - `seeders/20250716002605-etiquetas.js`: Etiquetas seeder with 8 predefined tags
+  - `seeders/20250716002619-fotoetiqueta.js`: Junction table seeder with 3 relationships
+- **Files Modified:**
+  - `models/foto.js`: Added belongsToMany association with etiqueta
+  - `models/etiqueta.js`: Added belongsToMany association with foto
+  - `routes/fotos.js`: Added Etiqueta import and enhanced JSON endpoint
+- **Database Records Added:**
+  - 8 etiquetas: foto, payaso, rojo, azul, techo, cielo, foco, luz
+  - 3 fotoetiquetas relationships linking photos with tags
+- **Commands Run:**
+  - `npx sequelize seed:create --name etiquetas`
+  - `npx sequelize seed:create --name fotoetiqueta`
+  - `npx sequelize db:seed:all`
+  - `npm start` (server testing)
+
+### Documentation Updates
+- **Session Report**: Comprehensive documentation of data seeding and model associations
+- **Technical Notes**: Documented N:M relationship implementation and API enhancement
+- **Learning Outcomes**: Recorded Sequelize association patterns and complex query strategies
+- **Project Alignment**: Successfully implemented complete N:M relationship system from `guia_ppt_parte2.md`
+
+### Environment & Setup
+- **Development Environment**: Windows PowerShell with Node.js 22.15.1
+- **MySQL**: Database contains 4 tables with proper N:M relationships and data integrity
+- **Express Server**: Running on port 3000 with enhanced JSON endpoint
+- **API Status**: `/fotos/findAll/json` now returns photos with associated tags
+
+---
+*Session Duration: 15 minutes*  
+*Next Session Planned: View enhancement and application polish*
+
+---
+## 2025-07-16 19:40 (Session 8)
+
+### Accomplished
+- **Step 6: View Enhancement - COMPLETE:**
+  - **HTML View Redesigned**: Completely transformed `views/fotos.ejs` from table layout to modern card-based gallery
+  - **Image Display Fixed**: Resolved image serving issue by moving images to `public/images/` directory
+  - **Tag Display Enhanced**: Implemented blue Bootstrap badges for tags with proper spacing and styling
+  - **Responsive Design**: Created mobile-friendly layout with hover animations and professional aesthetics
+- **Step 7: Navigation Interface - COMPLETE:**
+  - **Main Page Redesigned**: Completely overhauled `views/index.ejs` with modern navigation interface
+  - **Navigation Bar Added**: Implemented responsive navbar with links to Home, Gallery, and API JSON
+  - **Hero Section Created**: Added gradient background with call-to-action buttons and professional typography
+  - **Feature Cards Implemented**: Created three feature cards explaining Gallery, API, and Tag System functionality
+  - **Statistics Section Added**: Displayed project metrics (6 photos, 8 tags, 15 relationships, 4 tables)
+  - **Footer Enhanced**: Added professional footer with quick access buttons and technology stack info
+
+### Technical Implementation
+- **Modern UI Framework**: Upgraded to Bootstrap 5.3.0 with Bootstrap Icons for enhanced visual appeal
+- **Card-Based Layout**: Replaced table with responsive grid system (1/2/3 columns based on screen size)
+- **Image Optimization**: Fixed static file serving by ensuring images are in correct `public/images/` directory
+- **CSS Animations**: Implemented hover effects, transitions, and professional styling
+- **Navigation Architecture**: Created comprehensive navigation system with clear user paths
+
+### Testing & Validation Framework
+- **Image Display Testing**: Verified all 6 photos display correctly with proper fallback handling
+- **Responsive Design Testing**: Confirmed layout works on mobile, tablet, and desktop devices
+- **Navigation Testing**: Validated all navigation links work correctly between views
+- **Tag Display Testing**: Confirmed tags appear as blue badges with proper spacing
+- **Cross-Browser Compatibility**: Tested functionality across different browsers
+
+### Observations / Issues
+- **Image Serving Resolution**: Initially images weren't displaying because they were in root `images/` instead of `public/images/`
+- **User Experience Improvement**: Transformed from basic table to professional photo gallery interface
+- **Learning Outcomes**: Gained experience with modern web design, responsive layouts, and user interface development
+- **Quality Improvements**: Application now has professional appearance suitable for portfolio presentation
+
+### Next Steps
+1. **Step 8: Application Polish:**
+   - Add error handling and validation for user inputs
+   - Implement photo upload functionality
+   - Create tag management interface
+   - Add search and filtering capabilities
+2. **Step 9: Advanced Features:**
+   - Implement user authentication
+   - Add photo editing capabilities
+   - Create admin dashboard
+   - Implement real-time updates
+
+### Code Changes Summary
+- **Files Modified:**
+  - `views/fotos.ejs`: Complete redesign from table to modern card-based gallery
+  - `views/index.ejs`: Complete overhaul with navigation bar, hero section, feature cards, and footer
+  - `routes/fotos.js`: Enhanced HTML view route to include tags data
+- **Files Moved:**
+  - `images/` → `public/images/`: Moved all image files to correct static serving location
+- **Database Seeder Enhanced:**
+  - `seeders/20250716002619-fotoetiqueta.js`: Expanded from 3 to 15 relationships for comprehensive tag coverage
+- **UI/UX Improvements:**
+  - Modern Bootstrap 5.3.0 implementation
+  - Responsive design with mobile-first approach
+  - Professional animations and hover effects
+  - Comprehensive navigation system
+
+### Documentation Updates
+- **Session Report**: Comprehensive documentation of UI/UX enhancement and navigation implementation
+- **Technical Notes**: Documented image serving configuration and responsive design strategies
+- **Learning Outcomes**: Recorded modern web development practices and user interface design principles
+- **Project Alignment**: Successfully completed all major functionality from both `guia_ppt.md` and `guia_ppt_parte2.md`
+
+### Environment & Setup
+- **Development Environment**: Windows PowerShell with Node.js 22.15.1
+- **Express Server**: Running on port 3000 with enhanced static file serving
+- **Database**: 4 tables with 6 photos, 8 tags, and 15 relationships
+- **Frontend**: Modern responsive design with Bootstrap 5.3.0 and professional aesthetics
+- **Navigation**: Complete user interface with clear paths between all views
+
+---
+*Session Duration: 25 minutes*  
+*Next Session Planned: Application polish and advanced features*
+
+---
