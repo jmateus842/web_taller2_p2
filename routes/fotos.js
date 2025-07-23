@@ -107,7 +107,7 @@ router.get('/findByTags/view', function(req, res, next) {
 router.get('/search/json', function(req, res, next) {
   const term = req.query.term;
   if (!term) {
-    // No term provided; redirect to all fotos json
+    // Si no se proporciona termino redirigir a todas las fotos json
     return res.redirect('/fotos/findAll/json');
   }
   // Si el termino es numerico intentar buscar por ID primero
@@ -140,7 +140,7 @@ router.get('/search/json', function(req, res, next) {
 router.get('/search/view', function(req, res, next) {
   const term = req.query.term;
   if (!term) {
-    // No term provided; redirect to all fotos view
+    // Si no se proporciona termino redirigir a la vista de todas las fotos
     return res.redirect('/fotos/findAll/view');
   }
   // Si el termino es numerico intentar buscar por ID primero

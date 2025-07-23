@@ -5,12 +5,12 @@ const {
 module.exports = (sequelize, DataTypes) => {
   class fotoetiqueta extends Model {
     /**
-     * Helper method for defining associations.
-     * This method is not a part of Sequelize lifecycle.
-     * The `models/index` file will call this method automatically.
+     * Metodo de ayuda para definir asociaciones.
+     * Este metodo no es parte del ciclo de vida de Sequelize.
+     * El archivo `models/index` llamara este metodo automaticamente.
      */
     static associate(models) {
-      // define association here
+      // definir la asociacion aqui
     }
   }
   fotoetiqueta.init({

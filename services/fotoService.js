@@ -2,26 +2,26 @@ const { foto, etiqueta } = require('../models');
 const { Op } = require('sequelize');
 
 /**
- * Service for handling Foto model operations
+ * Servicio para manejar las operaciones del modelo Foto
  */
 class FotoService {
   /**
-   * Find all fotos with their associated etiquetas
-   * @returns {Promise<Array>} Promise that resolves to an array of fotos
+   * Encuentra todas las fotos con sus etiquetas asociadas
+   * @returns {Promise<Array>} Promesa que resuelve en un arreglo de fotos
    */
   async findAll() {
     try {
       return await foto.findAll({
-        // Explicitly select only the columns we need
+        // Seleccionar explicitamente solo las columnas necesarias
         attributes: ['id', 'titulo', 'ruta', 'descripcion', 'createdAt'],
-        // Order by most recent first
+        // Ordenar por las mas recientes primero
         order: [['createdAt', 'DESC']],
-        // Include associated tags with optimized settings
+        // Incluir etiquetas asociadas con configuracion optimizada
         include: [{
           model: etiqueta,
-          // Select only needed tag attributes
+          // Seleccionar solo los atributos necesarios de la etiqueta
           attributes: ['id', 'texto'],
-          // Exclude all join table attributes for a cleaner response
+          // Excluir todos los atributos de la tabla intermedia para una respuesta mas limpia
           through: { attributes: [] }
         }]
       });
@@ -32,21 +32,21 @@ class FotoService {
   }
 
   /**
-   * Find a foto by its primary key (ID)
-   * @param {number|string} id - The ID of the foto to find
-   * @returns {Promise<Object|null>} Promise that resolves to the foto or null if not found
+   * Encuentra una foto por su llave primaria (ID)
+   * @param {number|string} id - El ID de la foto a buscar
+   * @returns {Promise<Object|null>} Promesa que resuelve en la foto o null si no se encuentra
    */
   async findById(id) {
     try {
       return await foto.findByPk(id, {
-        // Explicitly select only the columns we need
+        // Seleccionar explicitamente solo las columnas necesarias
         attributes: ['id', 'titulo', 'ruta', 'descripcion', 'createdAt'],
-        // Include associated tags with optimized settings
+        // Incluir etiquetas asociadas con configuracion optimizada
         include: [{
           model: etiqueta,
-          // Select only needed tag attributes
+          // Seleccionar solo los atributos necesarios de la etiqueta
           attributes: ['id', 'texto'],
-          // Exclude all join table attributes for a cleaner response
+          // Excluir todos los atributos de la tabla intermedia para una respuesta mas limpia
           through: { attributes: [] }
         }]
       });
@@ -57,9 +57,9 @@ class FotoService {
   }
 
   /**
-   * Find fotos with specific tags
-   * @param {Array<number|string>} tagIds - Array of tag IDs to filter by
-   * @returns {Promise<Array>} Promise that resolves to an array of matching fotos
+   * Encuentra fotos con tags especificos
+   * @param {Array<number|string>} tagIds - Arreglo de IDs de tags para filtrar
+   * @returns {Promise<Array>} Promesa que resuelve en un arreglo de fotos que coinciden
    */
   async findByTags(tagIds) {
     try {
@@ -68,13 +68,13 @@ class FotoService {
         include: [{
           model: etiqueta,
           attributes: ['id', 'texto'],
-          // Only include photos that have ALL the specified tags
+          // Incluir solo las fotos que tengan TODOS los tags especificados
           where: {
             id: {
               [Op.in]: tagIds
             }
           },
-          // Exclude join table data
+          // Excluir datos de la tabla intermedia
           through: { attributes: [] }
         }]
       });
@@ -85,9 +85,9 @@ class FotoService {
   }
 
   /**
-   * Search fotos by a text term contained in titulo or descripcion (case-insensitive)
-   * @param {string} term - Search string
-   * @returns {Promise<Array>} Array of matching fotos
+   * Busca fotos por un termino de texto contenido en titulo o descripcion (no sensible a mayusculas)
+   * @param {string} term - Cadena de busqueda
+   * @returns {Promise<Array>} Arreglo de fotos que coinciden
    */
   async searchByText(term) {
     try {

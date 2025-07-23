@@ -2,10 +2,10 @@ const { Sequelize } = require('sequelize');
 const config = require('./config/config.json');
 
 async function setupDatabase() {
-  console.log('🔧 Setting up database for photo gallery project...\n');
+  console.log('🔧 Configurando base de datos para el proyecto de galería de fotos...\n');
   
   try {
-    // First, connect without specifying a database to create it
+    // Primero, conectar sin especificar una base de datos para crearla
     const sequelize = new Sequelize({
       username: config.development.username,
       password: config.development.password,
@@ -15,18 +15,18 @@ async function setupDatabase() {
       logging: false
     });
 
-    // Test connection
+    // Probar conexion
     await sequelize.authenticate();
-    console.log('✅ MySQL connection successful!');
+    console.log('✅ Conexión MySQL exitosa!');
     
-    // Create the database if it doesn't exist
+    // Crear la base de datos si no existe
     await sequelize.query(`CREATE DATABASE IF NOT EXISTS ${config.development.database};`);
-    console.log(`✅ Database '${config.development.database}' created/verified successfully!`);
+    console.log(`✅ Base de datos '${config.development.database}' creada/verificada exitosamente!`);
     
-    // Close the connection
+    // Cerrar la conexion
     await sequelize.close();
     
-    // Now test connection to the specific database
+    // Ahora probar conexion a la base de datos especifica
     const dbSequelize = new Sequelize(
       config.development.database,
       config.development.username,
@@ -40,26 +40,26 @@ async function setupDatabase() {
     );
     
     await dbSequelize.authenticate();
-    console.log(`✅ Successfully connected to database '${config.development.database}'!`);
+    console.log(`✅ Conexión exitosa a la base de datos '${config.development.database}'!`);
     await dbSequelize.close();
     
-    console.log('\n🎉 Database setup complete!');
-    console.log('📊 Database name:', config.development.database);
+    console.log('\n🎉 Configuración de base de datos completa!');
+    console.log('📊 Nombre de la base de datos:', config.development.database);
     console.log('🔗 Host:', config.development.host);
-    console.log('👤 User:', config.development.username);
-    console.log('\n📝 Next steps:');
-    console.log('1. Update the password in config/config.json');
-    console.log('2. Run: npx sequelize model:create --name foto --attributes titulo:string,descripcion:string,calificacion:float,ruta:string');
-    console.log('3. Run: npx sequelize db:migrate');
+    console.log('👤 Usuario:', config.development.username);
+    console.log('\n📝 Próximos pasos:');
+    console.log('1. Actualizar la contraseña en config/config.json');
+    console.log('2. Ejecutar: npx sequelize model:create --name foto --attributes titulo:string,descripcion:string,calificacion:float,ruta:string');
+    console.log('3. Ejecutar: npx sequelize db:migrate');
     
   } catch (error) {
-    console.error('❌ Database setup failed:');
+    console.error('❌ Configuración de base de datos fallida:');
     console.error('Error:', error.message);
-    console.log('\n🔧 Troubleshooting:');
-    console.log('1. Make sure MySQL is running');
-    console.log('2. Check if the password in config/config.json is correct');
-    console.log('3. Try connecting manually: mysql -u root -p');
-    console.log('4. If no password was set during MySQL installation, change "your_mysql_password_here" to null');
+    console.log('\n🔧 Solución de problemas:');
+    console.log('1. Asegúrate de que MySQL esté en ejecución');
+    console.log('2. Verifica si la contraseña en config/config.json es correcta');
+    console.log('3. Intenta conectarte manualmente: mysql -u root -p');
+    console.log('4. Si no se estableció contraseña durante la instalación de MySQL, cambia "your_mysql_password_here" a null');
   }
 }
 
