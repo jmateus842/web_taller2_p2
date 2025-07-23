@@ -1,0 +1,4 @@
+Implementar:
+	Consulta por ID
+		Devuelve json con informacion del id proporcionado
+		Devuelve vista con datos del id proporcionado

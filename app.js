@@ -12,7 +12,7 @@ app.use(express.urlencoded({ extended: true }));
 app.set('view engine', 'ejs');
 app.set('views', path.join(__dirname, 'views'));
 
-// Servir archivos estáticos
+// Servir archivos estaticos
 app.use(express.static(path.join(__dirname, 'public')));
 
 // Importar rutas
@@ -20,7 +20,7 @@ var fotosRouter = require('./routes/fotos');
 
 // Ruta principal
 app.get('/', (req, res) => {
-  res.render('index', { title: 'Sistema de Gestión de Fotos' });
+  res.render('index', { title: 'Sistema de Gestion de Fotos' });
 });
 
 // Usar las rutas de fotos

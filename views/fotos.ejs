@@ -51,10 +51,24 @@
                 <h1 class="display-4 text-center mb-4">
                     <i class="bi bi-images"></i> <%= title %>
                 </h1>
-                <p class="text-center text-muted">Galería de fotos con etiquetas</p>
+                <p class="text-center text-muted">Galeria de fotos con etiquetas</p>
             </div>
         </div>
         
+        <!-- Search Bar -->
+        <div class="row justify-content-center mb-4">
+            <div class="col-lg-6">
+                <form action="/fotos/search/view" method="get">
+                    <div class="input-group">
+                        <input type="text" name="term" class="form-control" placeholder="Buscar fotos..." value="<%= typeof searchTerm !== 'undefined' ? searchTerm : '' %>">
+                        <button class="btn btn-primary" type="submit">
+                            <i class="bi bi-search"></i>
+                        </button>
+                    </div>
+                </form>
+            </div>
+        </div>
+
         <div class="row row-cols-1 row-cols-md-2 row-cols-lg-3 g-4">
             <% arrFotos.forEach((foto) => { %>
                 <div class="col">
@@ -66,6 +80,16 @@
                         <div class="card-body d-flex flex-column">
                             <h5 class="card-title photo-title"><%= foto.titulo %></h5>
                             <p class="card-text photo-description"><%= foto.descripcion %></p>
+
+                            <!-- Botones para ver detalle y JSON -->
+                            <div class="d-flex gap-2 mb-2">
+                                <a href="/fotos/find/<%= foto.id %>/view" class="btn btn-sm btn-outline-primary">
+                                    <i class="bi bi-eye"></i> Detalle
+                                </a>
+                                <a href="/fotos/find/<%= foto.id %>/json" class="btn btn-sm btn-outline-secondary">
+                                    <i class="bi bi-code"></i> JSON
+                                </a>
+                            </div>
                             
                             <div class="mt-auto">
                                 <div class="mb-2">
